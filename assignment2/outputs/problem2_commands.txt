@@ -1,0 +1,174 @@
+=== Step 2: Pipeline ===
+$ who | wc -l
+0
+
+=== Step 3: Cat vs Redirection ===
+$ cat data/log.txt | wc -l
+9
+$ wc -l < data/log.txt
+9
+
+=== Step 5-11: Background Processes ===
+$ sleep 90 &
+PID: 95
+
+$ ps | grep sleep
+   95 ?        00:00:00 sleep
+
+$ top -b -n 1 | head -10
+top - 02:58:14 up 1 min,  0 user,  load average: 0.00, 0.00, 0.00
+Tasks:   7 total,   1 running,   6 sleeping,   0 stopped,   0 zombie
+%Cpu(s):   0.0 us,   0.0 sy,   0.0 ni, 100.0 id,   0.0 wa,   0.0 hi,   0.0 si 
+MiB Mem :   9216.0 total,   9198.1 free,     17.9 used,     10.0 buff/cache     
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   9198.1 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    1 root      20   0  420244  21792      0 S   0.0   0.2   0:01.69 process_a+
+   36 root      20   0   10848   3232      0 S   0.0   0.0   0:00.01 sh
+   38 root      20   0   12504   4600      0 S   0.0   0.0   0:00.10 complete_+
+
+$ pgrep sleep
+95
+
+$ kill -l
+ 1) SIGHUP	 2) SIGINT	 3) SIGQUIT	 4) SIGILL	 5) SIGTRAP
+ 6) SIGABRT	 7) SIGBUS	 8) SIGFPE	 9) SIGKILL	10) SIGUSR1
+11) SIGSEGV	12) SIGUSR2	13) SIGPIPE	14) SIGALRM	15) SIGTERM
+
+$ kill -15 95
+
+=== Step 14: Sort and Uniq ===
+$ sort data/log.txt
+alpha browse products
+alpha login FAIL
+alpha login OK
+alpha login OK
+bravo browse checkout
+bravo pay 100.00
+bravo pay 19.99
+charlie login OK
+charlie pay 7.50
+
+$ sort data/log.txt | uniq -c
+      1 alpha browse products
+      1 alpha login FAIL
+      2 alpha login OK
+      1 bravo browse checkout
+      1 bravo pay 100.00
+      1 bravo pay 19.99
+      1 charlie login OK
+      1 charlie pay 7.50
+
+$ sort data/log.txt | uniq -d
+alpha login OK
+
+$ sort data/log.txt | uniq -u
+alpha browse products
+alpha login FAIL
+bravo browse checkout
+bravo pay 100.00
+bravo pay 19.99
+charlie login OK
+charlie pay 7.50
+
+=== Head and Tail ===
+$ head -n 3 data/log.txt
+alpha login OK
+alpha login FAIL
+bravo pay 19.99
+
+$ head -c 20 data/log.txt
+alpha login OK
+alpha
+$ head -n 5 data/log.txt | tail -n 2
+bravo pay 100.00
+charlie pay 7.50
+
+$ tail -n 3 data/log.txt
+bravo browse checkout
+charlie login OK
+alpha login OK
+
+$ tail -n +3 data/log.txt
+bravo pay 19.99
+bravo pay 100.00
+charlie pay 7.50
+alpha browse products
+bravo browse checkout
+charlie login OK
+alpha login OK
+
+=== Tee ===
+$ cat data/log.txt | tee -a /tmp/tee_output.txt | wc -l
+9
+
+=== Cut ===
+$ cut -c 1-5 data/log.txt
+alpha
+alpha
+bravo
+bravo
+charl
+alpha
+bravo
+charl
+alpha
+
+$ cut -f 1 -d ' ' data/log.txt
+alpha
+alpha
+bravo
+bravo
+charlie
+alpha
+bravo
+charlie
+alpha
+
+$ cut -f 2- -d ' ' --output-delimiter='|' data/log.txt
+login|OK
+login|FAIL
+pay|19.99
+pay|100.00
+pay|7.50
+browse|products
+browse|checkout
+login|OK
+login|OK
+
+=== Paste ===
+$ paste data/a.txt data/b.txt
+apples	apples
+oranges	oranges
+walnuts	grapes
+
+$ paste -d ',' data/a.txt data/b.txt
+apples,apples
+oranges,oranges
+walnuts,grapes
+
+$ paste -s data/a.txt
+apples	oranges	walnuts
+
+$ cat data/a.txt | paste - data/b.txt
+apples	apples
+oranges	oranges
+walnuts	grapes
+
+=== AWK ===
+$ awk '{print $1, $NF}' data/log.txt
+alpha OK
+alpha FAIL
+bravo 19.99
+bravo 100.00
+charlie 7.50
+alpha products
+bravo checkout
+charlie OK
+alpha OK
+
+$ awk 'NR>=2 && NR<=4 {print NR, $0}' data/log.txt
+2 alpha login FAIL
+3 bravo pay 19.99
+4 bravo pay 100.00
+

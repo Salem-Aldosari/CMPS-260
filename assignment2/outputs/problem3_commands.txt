@@ -1,0 +1,136 @@
+=== Step 2: Grep/Egrep Regex Concepts ===
+$ grep '[aeiou]' data/regex_lab.txt
+beat a brat on a boat
+b e a t
+b o a t
+
+$ grep '[^0-9]' data/regex_lab.txt
+beat a brat on a boat
+b e a t
+b o a t
+
+$ grep '^var' data/regex_lab.txt
+var=_ok2
+var2=Bad-Name
+var3=good_name_3
+
+$ grep 'txt$' data/regex_lab.txt
+
+$ grep 'a*' data/regex_lab.txt
+beat a brat on a boat
+b e a t
+b o a t
+
+$ egrep '[0-9]{1,2}:[0-9]{2}' data/regex_lab.txt
+time=9:05 am
+time=12:30 pm
+time=1:01 pm
+
+$ egrep '(login|pay)' data/log.txt
+alpha login OK
+alpha login FAIL
+bravo pay 19.99
+bravo pay 100.00
+charlie pay 7.50
+charlie login OK
+alpha login OK
+
+=== Step 3: Grep Options ===
+$ grep -n 'var' data/regex_lab.txt
+5:var=_ok2
+6:var2=Bad-Name
+7:var3=good_name_3
+
+$ grep -v 'EMPTY' data/regex_lab.txt | head -5
+beat a brat on a boat
+b e a t
+b o a t
+var=_ok2
+var2=Bad-Name
+
+$ grep -e 'amount' -e 'time' data/regex_lab.txt
+amount=$19.99
+amount=$100.00
+amount=$7.5
+time=9:05 am
+time=12:30 pm
+time=1:01 pm
+
+$ grep -A 2 'EMPTY' data/regex_lab.txt
+EMPTYLINE:
+var=_ok2
+var2=Bad-Name
+
+=== Step 4: Practical Regex Patterns ===
+$ egrep '[a-zA-Z_][a-zA-Z_0-9]*' data/regex_lab.txt | head -3
+beat a brat on a boat
+b e a t
+b o a t
+
+$ egrep '\-9+\.?[0-9]*' data/regex_lab.txt
+amount=$19.99
+amount=$100.00
+amount=$7.5
+
+$ egrep '[0-9]{1,2}:[0-9]{2}' data/regex_lab.txt
+time=9:05 am
+time=12:30 pm
+time=1:01 pm
+
+$ egrep '<[Hh][12]>' data/regex_lab.txt
+HTML <h1>Title</h1>
+HTML <H2>Section</H2>
+
+=== Step 5-6: Fgrep for Literal Strings ===
+$ fgrep 'a*b*' data/regex_lab.txt
+literal=a*b* and also ^$ appears here
+
+$ grep 'a\*b\*' data/regex_lab.txt
+literal=a*b* and also ^$ appears here
+
+=== Step 7: TR Operations ===
+$ cat data/regex_lab.txt | tr '[:lower:]' '[:upper:]' | head -3
+BEAT A BRAT ON A BOAT
+B E A T
+B O A T
+
+$ cat data/regex_lab.txt | tr -s ' ' | head -3
+beat a brat on a boat
+b e a t
+b o a t
+
+$ cat data/regex_lab.txt | tr -d '0-9' | head -3
+beat a brat on a boat
+b e a t
+b o a t
+
+=== Step 8: SED Operations ===
+$ sed 's/var/variable/' data/regex_lab.txt
+variable=_ok2
+variable2=Bad-Name
+variable3=good_name_3
+
+$ sed 's/a/A/g' data/regex_lab.txt | head -3
+beAt A brAt on A boAt
+b e A t
+b o A t
+
+$ sed -n 's/amount/AMOUNT/p' data/regex_lab.txt
+AMOUNT=$19.99
+AMOUNT=$100.00
+AMOUNT=$7.5
+
+$ sed '5,7s/var/VAR/' data/regex_lab.txt
+EMPTYLINE:
+VAR=_ok2
+VAR2=Bad-Name
+VAR3=good_name_3
+amount=$19.99
+
+$ sed '/EMPTY/d' data/regex_lab.txt | head -5
+beat a brat on a boat
+b e a t
+b o a t
+var=_ok2
+var2=Bad-Name
+

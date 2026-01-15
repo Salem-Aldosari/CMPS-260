@@ -1,0 +1,8 @@
+$ mkdir -p ~/cmps260/linux_assignment/{data,outputs,scripts}
+$ cd ~/cmps260/linux_assignment
+
+$ pwd
+/root/cmps260/linux_assignment
+
+$ whoami
+root

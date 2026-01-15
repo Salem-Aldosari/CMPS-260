@@ -1,0 +1,16 @@
+beat a brat on a boat
+b e a t
+b o a t
+EMPTYLINE:
+var=_ok2
+var2=Bad-Name
+var3=good_name_3
+amount=$19.99
+amount=$100.00
+amount=$7.5
+time=9:05 am
+time=12:30 pm
+time=1:01 pm
+HTML <h1>Title</h1>
+HTML <H2>Section</H2>
+literal=a*b* and also ^$ appears here

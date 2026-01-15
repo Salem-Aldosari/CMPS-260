@@ -1,0 +1,9 @@
+alpha login OK
+alpha login FAIL
+bravo pay 19.99
+bravo pay 100.00
+charlie pay 7.50
+alpha browse products
+bravo browse checkout
+charlie login OK
+alpha login OK
