@@ -1,30 +1,27 @@
-# Assignment 2 - Linux Commands and Scripting
+# Assignment 2 
 
-**Student:** [Your Name]  
-**Course:** CMPS 260 - Introduction to Linux  
-**Due:** January 21, 2026
 
 ---
 
-## Problem 0: Environment Setup
+Problem 0: Environment Setup
 
-### Questions:
+Questions:
 
-**What does `pwd` do?**
+What does `pwd` do
 
 `pwd` stands for "print working directory". It displays the absolute path of the current directory you're in. This is useful for knowing your location in the filesystem.
 
-**What does `whoami` do?**
+What does `whoami` do?
 
 `whoami` prints the username of the current logged-in user. It's helpful for confirming which user account you're using, especially when working with multiple accounts or in scripts.
 
 ---
 
-## Problem 1: UNIX Filesystem + Shell
+Problem 1: UNIX Filesystem + Shell
 
-### Step 1-2: Command Behavior
+Step 1-2: Command Behavior
 
-**Explain why the two commands behave differently:**
+Explain why the two commands behave differently:
 
 - `ls ; date` - The semicolon (`;`) is a command separator. This runs two separate commands: first `ls`, then `date`. Both commands execute successfully.
 
@@ -34,7 +31,7 @@
 
 ---
 
-### Step 6-7: Brace Expansion
+
 
 **Explain what happens in Step 6:**
 
@@ -62,7 +59,7 @@ The `-p` flag creates parent directories as needed, so it creates the entire pat
 - **Step 20**: Created `u_after.txt` with new umask, resulting in permissions `rw-------` (600)
 - **Step 21**: Compared both files - `u_before.txt` is readable by everyone, while `u_after.txt` is only accessible by the owner
 
-**Key Point:** A higher umask value = more restrictive default permissions. Umask `077` means "remove all permissions for group and others."
+
 
 ---
 
@@ -128,11 +125,11 @@ Example: `cat file | command` runs both cat and command at the same time, while 
 
 ---
 
-## Problem 3: Regular Expressions, grep/egrep/fgrep, tr, sed
+ Problem 3: Regular Expressions, grep/egrep/fgrep, tr, sed
 
-### Step 5: Fgrep for Literal Strings
+# Step 5: Fgrep for Literal Strings
 
-**Why is fgrep useful for fixed strings?**
+Why is fgrep useful for fixed strings?
 
 `fgrep` (or `grep -F`) treats the search pattern as a literal string, not a regular expression. This is useful when:
 
@@ -151,7 +148,7 @@ Without fgrep, you'd need to remember to escape every special character, which i
 
 ## Summary
 
-This assignment covered fundamental Linux concepts:
+
 
 - **File System Navigation**: Understanding paths, creating directory structures
 - **Shell Behavior**: Command separators, quoting, brace expansion
@@ -160,25 +157,6 @@ This assignment covered fundamental Linux concepts:
 - **Text Processing**: Filters, pipes, sorting, cutting, pasting
 - **Pattern Matching**: Regular expressions, grep family, tr, sed
 
-These skills form the foundation for effective Linux system administration and scripting.
 
----
 
-## Files Included
 
-```
-assignment2/
-├── README.md
-├── outputs/
-│   ├── problem0_commands.txt
-│   ├── problem1.txt
-│   ├── problem1_lecture2.txt
-│   ├── problem1_commands.txt
-│   ├── problem2_commands.txt
-│   └── problem3_commands.txt
-├── scripts/
-│   ├── problem2_processes_filters.sh
-│   └── problem3_regex_tr_sed.sh
-└── data/
-    └── [All created files from exercises]
-```
