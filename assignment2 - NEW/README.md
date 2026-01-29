@@ -1,6 +1,6 @@
 # Assignment 2 - Linux Commands and Scripting
 
-**Student:** [Your Name Here]  
+**Student:** Salem Al-Dosari
 **Course:** CMPS 260 - Introduction to Linux  
 **Due Date:** January 21, 2026
 
